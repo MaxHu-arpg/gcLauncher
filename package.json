@@ -1,0 +1,14 @@
+{
+  "name": "gclauncher",
+  "version": "3.3.0",
+  "description": "This is a Grasscutter Client Launcher!",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Max Hu",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.0.2"
+  }
+}
