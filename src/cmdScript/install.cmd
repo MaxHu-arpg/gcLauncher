@@ -8,13 +8,12 @@ title mitmproxy Installer
 set ORIGIN=%1
 set ORIGIN=%ORIGIN:"=%
 
-:: Make sure we are in the right directory
 cd "%ORIGIN%"
 
 echo Running proxy server in order to generate certificates...
 
 :: Start proxy server
-start "Proxy Server" "%ORIGIN%\mitmdump.exe" --ssl-insecure --set ip=%ip%
+start "Proxy Server" /min "%ORIGIN%\mitmdump.exe" --ssl-insecure --set ip=%ip%
 
 :: Allow the proxy server to create the certificates
 ping 127.0.0.1 -n 6 > nul
@@ -34,9 +33,15 @@ echo Adding ceritifcate...
 	echo.
     echo 或者打开目录"%USERPROFILE%\.mitmproxy"手动安装证书
 	echo ============================================================================================================
+	goto ed
 )
-
+echo ============================================================================================================
+echo.
 echo 安装完成，可关闭该界面！
+echo.
+echo ============================================================================================================
+
+:ed
 
 pause
 

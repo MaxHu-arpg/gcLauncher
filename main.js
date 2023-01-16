@@ -3,7 +3,10 @@ const path = require("path");
 
 console.log('App Name: ' + app.getName());
 console.log('App Version: ' + app.getVersion());
-console.log('Electron Version:' + process.versions.electron)
+console.log('Inner Version:')
+console.log(process.versions)
+console.log('process.env:')
+console.log(process.env)
 console.log('Is Packaged: ' + app.isPackaged);
 console.log('process.argv:' + process.argv)
 // console.log(path.join(__dirname, 'preload.js'));

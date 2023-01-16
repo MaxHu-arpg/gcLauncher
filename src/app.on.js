@@ -1,6 +1,7 @@
 //在此写主进程ipc通讯
 const {app, desktopCapturer, ipcMain, dialog} =require("electron");
 const Store = require('electron-store');
+require ('hazardous');
 const path = require("path");
 const os = require("os");
 const child_process = require("child_process");
@@ -44,19 +45,24 @@ const config = new Store({
     })
     ipcMain.handle('INSTALL_PROXY',  (event) => {
         console.log('Start install proxy')
-        const install = child_process.exec(`"${path.join(__dirname,'cmdScript','install.cmd')}" ${path.join(__dirname,'unpack')}`)
-        install.on('error',(error)=>{
-            console.log(error)
-        })
+        const subprocess = child_process.spawn('cmd.exe', ['/d', '/s', '/k', `""${path.join(__dirname,'cmdScript','install.cmd')}" "${path.join(__dirname,'proxy')}""`], {
+            cwd: process.env.APPDATA,
+            shell: true,
+            detached: true,
+            windowsHide: false
+        });
+        subprocess.on('error', (err) => {
+            console.log('启动子进程失败。');
+            console.log(err)
+        });
         return 1
     })
     ipcMain.handle('SELECT_FILE', async (event) => {
         let resolve = await dialog.showOpenDialog(MainWindow.getMainWin(),{
             title: '选择游戏可执行文件（.exe）',
-            defaultPath: path.join(__dirname,'..','..'),
+            defaultPath: process.env.HOME,
             filters: [
                 { name: '可执行文件', extensions: ['exe'] },
-                { name: 'All Files', extensions: ['*'] }
             ],
             properties: ['openFile','showHiddenFiles']
         })
@@ -64,8 +70,17 @@ const config = new Store({
     })
     ipcMain.handle('START_GAME',  (event,IP,PORT,GAME_PATH) => {
         console.log('Start Game')
-        console.log(`"${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'unpack')}"`)
-        child_process.exec(`"${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'unpack')}"`)
+        console.log(`'cmd.exe',['/d', '/s', '/c', ""${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'proxy')}""]`)
+        const subprocess =  child_process.spawn('cmd.exe',['/d', '/s', '/c', `""${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'proxy')}""`],{
+            cwd: process.env.APPDATA,
+            shell: true,
+            detached: true,
+            windowsHide: true
+        })
+        subprocess.on('error', (err) => {
+            console.log('启动子进程失败。');
+            console.log(err)
+        });
         return 1
     })
 })();

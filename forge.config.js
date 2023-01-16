@@ -1,5 +1,17 @@
+const path = require("path");
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    appCopyright: 'Max Hu @MaxHu-arpg',
+    icon: path.join("src","Ganyu.ico"),
+    asar: {
+      unpackDir: '{src/proxy,src/cmdScript}',
+    },
+    win32metadata: {
+      'requested-execution-level': "requireAdministrator",
+      FileDescription: 'This is a Grasscutter Client Launcher!',
+
+    },
+  },
   rebuildConfig: {},
   makers: [
     {
@@ -19,4 +31,10 @@ module.exports = {
       config: {},
     },
   ],
+  plugins: [
+    {
+      name: '@electron-forge/plugin-auto-unpack-natives',
+      config: {}
+    }
+  ]
 };
