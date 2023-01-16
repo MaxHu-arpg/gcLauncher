@@ -61,7 +61,7 @@ function createMainWindow() {
     });
     //↑↑↑↑ 使用了 Electron 内置的网络请求钩子方法修改HTTP Header ↑↑↑↑
     mainWin.loadFile(path.join(__dirname,'web','index.html')).then(() => {   //mainWin.loadURL('http://127.0.0.1:5173/')
-        // mainWin.webContents.openDevTools()
+        if (!app.isPackaged) {mainWin.webContents.openDevTools()}
         console.log('MainWindow Title is:' + mainWin.getTitle())
         console.log('MainWindow WebContents.URL is:' + mainWin.webContents.getURL())
 

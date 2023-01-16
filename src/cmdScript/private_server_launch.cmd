@@ -17,7 +17,9 @@ set IP=%1
 set PORT=%2
 set USE_HTTPS=%3
 set GAME_PATH=%4
+set GAME_PATH=%GAME_PATH:"=%
 set ORIGIN=%5
+set ORIGIN=%ORIGIN:"=%
 
 cd "%ORIGIN%"
 
@@ -43,7 +45,7 @@ ping 127.0.0.1 -n 5 > nul
 
 
 :: Launch game
-%GAME_PATH%
+"%GAME_PATH%"
 
 :: On exit clean proxy stuff
 :EXIT

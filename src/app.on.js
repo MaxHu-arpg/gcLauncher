@@ -71,7 +71,7 @@ const config = new Store({
     ipcMain.handle('START_GAME',  (event,IP,PORT,GAME_PATH) => {
         console.log('Start Game')
         console.log(`'cmd.exe',['/d', '/s', '/c', ""${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'proxy')}""]`)
-        const subprocess =  child_process.spawn('cmd.exe',['/d', '/s', '/c', `""${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'proxy')}""`],{
+        const subprocess = child_process.spawn('cmd.exe',['/d', '/s', '/c', `""${path.join(__dirname,'cmdScript','private_server_launch.cmd')}" ${IP} ${PORT} true "${GAME_PATH}" "${path.join(__dirname,'proxy')}""`],{
             cwd: process.env.APPDATA,
             shell: true,
             detached: true,
