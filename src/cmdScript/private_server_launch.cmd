@@ -36,7 +36,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v Pr
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "127.0.0.1:46852" /f >nul 2>nul
 
 :: Start proxy server
-start "Proxy Server" /b "%ORIGIN%\mitmdump.exe" --listen-host 127.0.0.1 -p 46852 -s "%ORIGIN%\proxy.py" -k --allow-hosts ".*\.yuanshen\.com|.*\.mihoyo\.com|.*\.hoyoverse\.com" --ssl-insecure --set ip=%IP% --set port=%PORT% --set use_https=%USE_HTTPS%
+start "Proxy Server" /b "%ORIGIN%\mitmdump.exe" --listen-host 127.0.0.1 -p 46852 -s "%ORIGIN%\proxy.py" -k --ssl-insecure --set ip=%IP% --set port=%PORT% --set use_https=%USE_HTTPS%
 
 echo Opening %GAME_PATH%
 
