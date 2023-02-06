@@ -28,7 +28,7 @@ echo Adding ceritifcate...
 	echo ============================================================================================================
 	echo !! 代理证书安装失败 !!
 	echo.
-	echo 请以管理员身份手动运行以下在cmd中代码
+	echo 请在cmd中以管理员身份手动运行以下代码
 	echo 			certutil -addstore root "%USERPROFILE%\.mitmproxy\mitmproxy-ca-cert.cer"
 	echo.
     echo 或者打开目录"%USERPROFILE%\.mitmproxy"手动安装证书

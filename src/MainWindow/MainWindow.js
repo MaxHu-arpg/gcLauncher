@@ -15,9 +15,9 @@ function getMainWin(){return mainWin}
 
 function getMainWinId(){return mainWinId}
 
-function createMainWindow() {
+async function createMainWindow() {
     console.log('Creating MainWindow ...');
-    Menu.setApplicationMenu(null)
+    if (app.isPackaged) {Menu.setApplicationMenu(null)}
     mainWin = new BrowserWindow({
         width: 1300,
         height: 750,
@@ -25,7 +25,7 @@ function createMainWindow() {
         minHeight: 750, //窗口最小的高度
         useContentSize: true,
         resizable: false,
-        icon :path.join(__dirname,'..','Ganyu.ico'),
+        icon: path.join(__dirname, '..', 'Ganyu.ico'),
         show: false,
         frame: true,
         autoHideMenuBar: true,
@@ -38,14 +38,14 @@ function createMainWindow() {
     console.log('MainWindow Title is:' + mainWin.getTitle())
     mainWinId = mainWin.id;
     mainWin.once('ready-to-show', () => mainWin.show());
-    mainWin.on('close',(event) => {
+    mainWin.on('close', (event) => {
         event.preventDefault()
         mainWin.hide()
     })
     //Electron CORS 问题处理
     mainWin.webContents.session.webRequest.onBeforeSendHeaders(
         (details, callback) => {
-            callback({ requestHeaders: { Origin: '*', ...details.requestHeaders } });
+            callback({requestHeaders: {Origin: '*', ...details.requestHeaders}});
         },
     );
 
@@ -60,12 +60,15 @@ function createMainWindow() {
         });
     });
     //↑↑↑↑ 使用了 Electron 内置的网络请求钩子方法修改HTTP Header ↑↑↑↑
-    mainWin.loadFile(path.join(__dirname,'web','index.html')).then(() => {   //mainWin.loadURL('http://127.0.0.1:5173/')
-        if (!app.isPackaged) {mainWin.webContents.openDevTools()}
-        console.log('MainWindow Title is:' + mainWin.getTitle())
-        console.log('MainWindow WebContents.URL is:' + mainWin.webContents.getURL())
 
-    });
+    if (app.isPackaged) {
+        await mainWin.loadFile(path.join(__dirname, 'web', 'index.html'))
+    } else {
+        await mainWin.loadURL('http://127.0.0.1:5173/')
+        mainWin.webContents.openDevTools()
+    }
+    console.log('MainWindow Title is:' + mainWin.getTitle())
+    console.log('MainWindow WebContents.URL is:' + mainWin.webContents.getURL())
 }
 
 function restoreMainWindow(){

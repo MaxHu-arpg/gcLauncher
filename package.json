@@ -1,6 +1,6 @@
 {
   "name": "gclauncher",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "This is a Grasscutter Client Launcher!",
   "main": "main.js",
   "scripts": {

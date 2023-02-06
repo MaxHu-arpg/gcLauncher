@@ -1,9 +1,10 @@
 # 食用技巧
-1. 下载链接（内含启动器与3.3私服本体）: [阿里云盘](https://www.aliyundrive.com/s/PA5s1N9vmfL) | [百度网盘](https://pan.baidu.com/s/1kNDoO8Wp2MX_-dXVBNNMCg?pwd=hqdk)
-2. 使用启动器安装代理服务
-3. 选择私服本体可执行文件（.exe）
-4. 输入私服服务器地址（ip和端口【不知道端口默认为443】）点击查询
-5. 查询成功后可见私服服务器状态，√ 启动 \
+1. 下载链接（内含启动器与3.4私服本体）: [阿里云盘](https://www.aliyundrive.com/s/WeYFpbPrkVR) | [百度网盘](https://pan.baidu.com/s/1CEeoPWqqGco3kWOLHH32oQ?pwd=tx8l)
+2. 下载链接（内含启动器与3.3私服本体）: [阿里云盘](https://www.aliyundrive.com/s/PA5s1N9vmfL) | [百度网盘](https://pan.baidu.com/s/1kNDoO8Wp2MX_-dXVBNNMCg?pwd=hqdk)
+3. 使用启动器安装代理服务
+4. 选择私服本体可执行文件（.exe）
+5. 输入私服服务器地址（ip和端口【不知道端口默认为443】）点击查询
+6. 查询成功后可见私服服务器状态，√ 启动 \
 \
 [release](https://github.com/MaxHu-arpg/gcLauncher/releases)
 

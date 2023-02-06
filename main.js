@@ -30,18 +30,18 @@ else {//如果此为已打开单例，app.on将接收到second-instance事件
         MainWindow.restoreMainWindow();
     })
     // 创建 mainWin, 加载应用的其余部分, etc...
-    app.on('ready', () => {
+    app.on('ready', async () => {
         //创建主窗口
-        MainWindow.createMainWindow();
+        await MainWindow.createMainWindow();
         //主窗口未成功创建则创建，在首次启动时
-        app.on('activate', () => {
+        app.on('activate', async () => {
             if (BrowserWindow.getAllWindows().length === 0) {
                 console.log('BrowserWindow.getAllWindows().length is 0')
-                MainWindow.createMainWindow();
+                await MainWindow.createMainWindow();
             }
         });
         //托盘设置
-        const {setUpTray} = require(path.join(__dirname,'src','tray','tray.js'))
+        const {setUpTray} = require(path.join(__dirname, 'src', 'tray', 'tray.js'))
         setUpTray();
     })
     //在此列出允许外链url
@@ -62,9 +62,9 @@ else {//如果此为已打开单例，app.on将接收到second-instance事件
             if (url.includes('http')) {
                 if (disposition === 'new-window') {return {action: 'allow'}}//这个最好不要，在程序内访问外部网页，危险
                 else {
-                    setImmediate(() => {
+                    setImmediate(async () => {
                         console.log('open website')
-                        shell.openExternal(url)
+                        await shell.openExternal(url)
                     })
                 }
             }
