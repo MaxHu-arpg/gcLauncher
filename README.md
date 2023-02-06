@@ -6,7 +6,7 @@
 5. 输入私服服务器地址（ip和端口【不知道端口默认为443】）点击查询
 6. 查询成功后可见私服服务器状态，√ 启动 \
 \
-[release](https://github.com/MaxHu-arpg/gcLauncher/releases)
+[Releases](https://github.com/MaxHu-arpg/gcLauncher/releases)
 
 
 ###  构建项目（仅为开发者）
